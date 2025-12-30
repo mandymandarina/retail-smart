@@ -23,6 +23,12 @@ Generación de listas de compra optimizadas según presupuesto
 
 Cálculo de totales y promedio de sostenibilidad
 
+### Bonus Frontend
+
+- Indicador visual de calidad nutricional usando `ecoscore` y `novaGroup` (🌱 / ⚠️).
+- Persistencia de la lista de compra en `localStorage` para evitar pérdida de datos al refrescar.
+- Ordenamiento de productos optimizados por puntaje de sostenibilidad.
+
 ## Algoritmos
 
 Optimización de listas de compra (multi-criterio)
@@ -49,11 +55,8 @@ POST /products/optimize
 Requisitos:
 
 Node.js 18+
-
 NPM
-
 Angular CLI
-
 NestJS CLI
 
 ## Backend
@@ -91,23 +94,50 @@ Desde la interfaz, el usuario puede cargar el dataset usando el botón “Cargar
 Durante el desarrollo se utilizó IA como asistente para:
 
 Definir la estructura del proyecto
-
 Resolver errores de configuración y tipado
 
 
-## Docker (opcional / bonus)
+## Docker (bonus)
 
 El proyecto puede ejecutarse utilizando Docker Compose para levantar frontend y backend juntos.
 
+Requisitos:
+- Docker Desktop
+- Docker Compose
+- WSL2 habilitado (Windows)
+
 docker compose up --build
 
-
-Esto expone:
+## Abrir la app
 
 Frontend: http://localhost:4200
 
 Backend: http://localhost:3000
 
+3) Endpoints (backend)
+
+GET http://localhost:3000/products/barcode/:barcode
+
+POST http://localhost:3000/products/optimize
+
+## Levantar con Docker (Frontend + Backend)
+
+Requisitos:
+- Docker Desktop (con WSL2 habilitado en Windows)
+- Docker Compose
+
+### Levantar todo
+Desde la raíz del repo (donde está `docker-compose.yml`):
+
+docker compose up --build
+
+## Bajar contenedores 
+
+docker compose down
+
+## Ver logs
+
+docker compose logs -f
 
 ## Notas finales
 
