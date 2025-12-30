@@ -1,0 +1,49 @@
+<div class="card">
+    <h2>Buscar producto</h2>
+    <p>Busca el producto por código de barra</p>
+    <div class="row">
+      <input
+        type="text"
+        placeholder="Ej: 3017620422003"
+        [(ngModel)]="barcode"
+        (keyup.enter)="search()"
+      />
+      <button (click)="search()" [disabled]="loading || !barcode.trim()">Buscar</button>
+      <button class="ghost" (click)="fillExample()">Ejemplo</button>
+      <button class="ghost" (click)="clear()">Limpiar</button>
+    </div>
+  
+   <!--  <p class="hint">Endpoint: <code>GET /products/barcode/:barcode</code></p> -->
+  
+    <div *ngIf="loading" class="loading">Cargando...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+  
+    <div *ngIf="product" class="result">
+      <div class="left">
+        <img *ngIf="product.imageUrl" [src]="product.imageUrl" alt="Producto" />
+        <div *ngIf="!product.imageUrl" class="placeholder">Sin imagen</div>
+      </div>
+  
+      <div class="right">
+        <h3>{{ product.name }}</h3>
+        <p class="muted">
+          <span *ngIf="product.brand">Marca: {{ product.brand }}</span>
+          <span *ngIf="!product.brand">Marca: -</span>
+        </p>
+  
+        <div class="badges">
+          <span class="badge">Barcode: {{ product.barcode }}</span>
+          <span class="badge">EcoScore: {{ product.ecoscore ?? '-' }}</span>
+          <span class="badge">NOVA: {{ product.novaGroup ?? '-' }}</span>
+        </div>
+  
+        <div class="cats" *ngIf="product.categories?.length">
+          <strong>Categorías:</strong>
+          <span *ngFor="let c of product.categories; let last = last">
+            {{ c }}<span *ngIf="!last">, </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
