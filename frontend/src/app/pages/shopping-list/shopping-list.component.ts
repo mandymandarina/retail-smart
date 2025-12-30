@@ -30,11 +30,22 @@ export class ShoppingListComponent {
 
   constructor(private productsService: ProductsService) {}
 
+  ngOnInit() {
+    const saved = localStorage.getItem('shopping-items');
+    if (saved) this.items = JSON.parse(saved);
+  }
+
+  private persist() {
+    localStorage.setItem('shopping-items', JSON.stringify(this.items));
+  }
+
   addItem(): void {
     this.error = '';
     this.result = null;
 
     const cleanName = this.name.trim();
+ 
+    
     if (!cleanName) {
       this.error = 'Ingresa el nombre del producto.';
       return;
@@ -55,13 +66,17 @@ export class ShoppingListComponent {
       sustainabilityScore: this.sustainabilityScore,
     });
 
+    this.persist();
+
     this.name = '';
     this.price = null;
     this.sustainabilityScore = 50;
+    
   }
 
   removeItem(id: string): void {
     this.items = this.items.filter((i) => i.id !== id);
+    this.persist();
     this.result = null;
   }
 
@@ -87,8 +102,17 @@ export class ShoppingListComponent {
       })
       .subscribe({
         next: (res) => {
-          this.result = res;
+      
+          const sortedSelected = [...res.selected].sort(
+            (a, b) => b.sustainabilityScore - a.sustainabilityScore
+          );
+
+          this.result = {
+            ...res,
+            selected: sortedSelected,
+          }
           this.loading = false;
+          
         },
         error: () => {
           this.error = 'No se pudo optimizar la lista (revisa que el backend esté arriba).';
@@ -96,6 +120,7 @@ export class ShoppingListComponent {
         },
       });
   }
+  
 
   loadExample(): void {
     this.budget = 10000;
@@ -105,7 +130,10 @@ export class ShoppingListComponent {
       { id: crypto.randomUUID(), name: 'Snack ultra-procesado', price: 1800, sustainabilityScore: 20 },
       { id: crypto.randomUUID(), name: 'Leche', price: 1500, sustainabilityScore: 55 },
     ];
+    this.persist();
     this.result = null;
     this.error = '';
   }
+
+  
 }

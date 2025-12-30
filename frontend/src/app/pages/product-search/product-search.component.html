@@ -43,6 +43,19 @@
             {{ c }}<span *ngIf="!last">, </span>
           </span>
         </div>
+
+        <div class="badge2 good" *ngIf="isHealthy(product)">
+          🟢 Buena opción
+        </div>
+        
+        <div class="badge2 warn" *ngIf="isMedium(product)">
+          🟡 Consumo moderado
+        </div>
+        
+        <div class="badge2 bad" *ngIf="isUnhealthy(product)">
+          🔴 Ultra procesado
+        </div>
+        
       </div>
     </div>
   </div>

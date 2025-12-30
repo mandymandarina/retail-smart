@@ -61,4 +61,17 @@ export class ProductSearchComponent {
     this.product = null;
     this.error = '';
   }
+
+  isHealthy(p: Product): boolean {
+    return (p.ecoscore === 'a' || p.ecoscore === 'b') && (p.novaGroup ?? 4) <= 2;
+  }
+  
+  isMedium(p: Product): boolean {
+    return p.ecoscore === 'c';
+  }
+  
+  isUnhealthy(p: Product): boolean {
+    return (p.novaGroup ?? 0) >= 4;
+  }
+  
 }

@@ -80,6 +80,12 @@
           <strong>Presupuesto:</strong> {{ budget }}
         </p>
         <p><strong>Promedio sostenibilidad:</strong> {{ result.totals.avgSustainability }}/100</p>
+
+        <p class="good" *ngIf="result.totals.avgSustainability >= 70">🌱  Excelente elección sostenible </p>
+        <p class="warn" *ngIf="result.totals.avgSustainability < 40">⚠️ Podrías mejorar el impacto ambiental </p>
+        <p class="medium" *ngIf="result.totals.avgSustainability >= 40 && result.totals.avgSustainability < 70">
+          👍 Buena elección, puedes mejorar un poco más
+        </p>
   
         <h4>Seleccionados</h4>
         <ul>
