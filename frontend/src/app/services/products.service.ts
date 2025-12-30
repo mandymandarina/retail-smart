@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment-prod';
 
 export type Product = {
   barcode: string;
@@ -47,7 +48,7 @@ export type NormalizedProduct = {
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

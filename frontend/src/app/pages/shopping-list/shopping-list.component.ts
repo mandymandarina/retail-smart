@@ -11,7 +11,9 @@ import { ProductsService, OptimizeItem, OptimizeResult } from '../../services/pr
   styleUrl: './shopping-list.component.scss',
 })
 export class ShoppingListComponent {
+
   budget = 10000;
+  
 
   // Inputs
   name = '';
@@ -53,7 +55,6 @@ export class ShoppingListComponent {
       sustainabilityScore: this.sustainabilityScore,
     });
 
-    // Reset inputs
     this.name = '';
     this.price = null;
     this.sustainabilityScore = 50;

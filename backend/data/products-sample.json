@@ -1,0 +1,11 @@
+[
+    { "id": "milk", "name": "Leche 1L", "price": 1200, "sustainabilityScore": 55 },
+    { "id": "bread", "name": "Pan integral", "price": 1800, "sustainabilityScore": 70 },
+    { "id": "eggs", "name": "Huevos 12u", "price": 3200, "sustainabilityScore": 60 },
+    { "id": "beans", "name": "Porotos 1kg", "price": 2500, "sustainabilityScore": 80 },
+    { "id": "chicken", "name": "Pollo 1kg", "price": 6500, "sustainabilityScore": 40 },
+    { "id": "tuna", "name": "Atún lata", "price": 1700, "sustainabilityScore": 50 },
+    { "id": "oats", "name": "Avena 1kg", "price": 2600, "sustainabilityScore": 85 },
+    { "id": "apples", "name": "Manzanas 1kg", "price": 2000, "sustainabilityScore": 75 }
+  ]
+  

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { OptimizeDto } from './dto/optimize.dto';
 
@@ -9,6 +10,7 @@ export type NormalizedProduct = {
   categories?: string[];
   ecoscore?: string | null;
   novaGroup?: number | null;
+  sustainabilityScore: number;
 };
 
 export type OptimizeResult = {
@@ -41,6 +43,31 @@ type OpenFoodFactsResponse = {
 @Injectable()
 export class ProductsService {
   // GET /products/barcode/:barcode
+
+  private calculateSustainabilityScore(
+    ecoscore?: string | null,
+    novaGroup?: number | null,
+  ): number {
+    const ecoscoreMap: Record<string, number> = {
+      a: 100,
+      b: 80,
+      c: 60,
+      d: 40,
+      e: 20,
+    };
+
+    const ecoScore = ecoscore
+      ? (ecoscoreMap[ecoscore.toLowerCase()] ?? 50)
+      : 50;
+
+    let novaPenalty = 0;
+    if (novaGroup === 2) novaPenalty = 10;
+    if (novaGroup === 3) novaPenalty = 20;
+    if (novaGroup === 4) novaPenalty = 35;
+
+    const score = ecoScore - novaPenalty;
+    return Math.max(0, Math.min(100, score));
+  }
   async getByBarcode(barcode: string): Promise<NormalizedProduct> {
     const res = await fetch(
       `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`,
@@ -57,6 +84,12 @@ export class ProductsService {
     }
 
     const p = data.product;
+    // eslint-disable-next-line prettier/prettier
+  
+    const sustainabilityScore = this.calculateSustainabilityScore(
+      p.ecoscore_grade ?? null,
+      p.nova_group ?? null,
+    );
 
     return {
       barcode,
@@ -73,6 +106,8 @@ export class ProductsService {
           : [],
       ecoscore: p.ecoscore_grade ?? null,
       novaGroup: p.nova_group ?? null,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      sustainabilityScore,
     };
   }
 

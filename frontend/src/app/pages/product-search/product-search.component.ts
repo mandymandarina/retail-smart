@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../../../environments/environment-prod';
 
 export type Product = {
   barcode: string;
@@ -26,7 +27,7 @@ export class ProductSearchComponent {
   error = '';
   product: Product | null = null;
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = environment.apiUrl;;
 
   constructor(private http: HttpClient) {}
 

@@ -1,0 +1,14 @@
+{
+    "budget": 12000,
+    "items": [
+      { "id": "milk-1", "name": "Leche descremada 1L", "price": 1250, "sustainabilityScore": 72 },
+      { "id": "bread-1", "name": "Pan integral", "price": 2100, "sustainabilityScore": 80 },
+      { "id": "eggs-1", "name": "Huevos (12)", "price": 3990, "sustainabilityScore": 68 },
+      { "id": "rice-1", "name": "Arroz 1kg", "price": 1890, "sustainabilityScore": 60 },
+      { "id": "beans-1", "name": "Porotos 1kg", "price": 2490, "sustainabilityScore": 85 },
+      { "id": "tuna-1", "name": "Atún en lata", "price": 1790, "sustainabilityScore": 55 },
+      { "id": "yogurt-1", "name": "Yogurt natural 1L", "price": 2690, "sustainabilityScore": 70 },
+      { "id": "choc-1", "name": "Chocolate", "price": 1590, "sustainabilityScore": 40 }
+    ]
+  }
+  
